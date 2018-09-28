@@ -1,15 +1,16 @@
 class PolyTreeNode
   attr_accessor :children, :value, :parent
 
-  def initialize(children, value, parent = nil)
+  #children, value, parent = nil)
+  def initialize(value)
     @value = value
     # @parent = []
-    @parent = parent
+    @parent = nil
     @children = []
   end
 
-  def parent = (parent_param)
-    @parent.children.delete(self) unless @parent == nil
+  def parent=(parent_param)
+    @parent.children.delete(self) unless @parent.nil?
     @parent = parent_param
     unless @parent == nil || @parent.children.include?(self)
       @parent.children << self
@@ -17,23 +18,27 @@ class PolyTreeNode
 
   end
 
-  def add_children(c_node)
-    if @children.include?(c_node)
-      c_node.parent = nil
-      @children.delete(c_node)
+  def add_child(c_node)
+    # if @children.include?(c_node)
+    #   c_node.parent = nil
+    #   @children.delete(c_node)
+    #
+    # elsif @parent == c_node
+    #   raise "Parent is designated. Cannot remove child from parent."
+    # else
+    #   raise "Child not found."
+    # end
 
-    elsif @parent == c_node
-      raise "Parent is designated. Cannot remove child from parent."
-    else
-      raise "Child not found."
-    end
+    c_node.parent = self
   end
 
   def delete_child(c_node)
-    unless @children.include?(c_node)
-      raise "This node isn't a c_node (child)."
-    end
-    c_node.parent = nil
+    # unless @children.include?(c_node)
+    #   raise "This node isn't a c_node (child)."
+    # end
+    # c_node.parent = nil
+    c_node.parent = nil if @children.include?(c_node)
+    @children.delete(c_node) if @children.include?(c_node)
   end
 
   # def DFS(target)

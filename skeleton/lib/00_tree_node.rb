@@ -1,3 +1,5 @@
+require "byebug"
+
 class PolyTreeNode
   attr_accessor :children, :value, :parent
 
@@ -58,12 +60,19 @@ class PolyTreeNode
   # end
 
   def dfs(target)
-      return self if self.value == target
-      self.children.each do |child|
-        result = child.DFS(target)
-        return result if result
-      end
-      nil
+      # return self if self.value == target
+      # self.children.each do |child|
+      #   result = child.DFS(target)
+      #   return result if result
+      # end
+      # nil
+
+    return self if value == target
+    children.each do |child|
+      result = child.dfs(target)
+      return result if result
+    end
+    nil
   end
 
   def bfs(target)

@@ -32,13 +32,21 @@ class PolyTreeNode
     c_node.parent = self
   end
 
-  def delete_child(c_node)
+  def remove_child(c_node)
     # unless @children.include?(c_node)
     #   raise "This node isn't a c_node (child)."
     # end
     # c_node.parent = nil
-    c_node.parent = nil if @children.include?(c_node)
-    @children.delete(c_node) if @children.include?(c_node)
+
+    # alt ans
+    # c_node.parent = nil if @children.include?(c_node)
+    # @children.delete(c_node) if @children.include?(c_node)
+
+    if @children.include?(c_node)
+      c_node.parent = nil
+      @children.delete(c_node)
+    end
+
   end
 
   # def DFS(target)

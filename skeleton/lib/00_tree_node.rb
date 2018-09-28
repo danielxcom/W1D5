@@ -45,6 +45,8 @@ class PolyTreeNode
     if @children.include?(c_node)
       c_node.parent = nil
       @children.delete(c_node)
+    else
+      raise "Error, child not found."
     end
 
   end
@@ -55,7 +57,7 @@ class PolyTreeNode
   #   return nil if @children.empty?
   # end
 
-  def DFS(target)
+  def dfs(target)
       return self if self.value == target
       self.children.each do |child|
         result = child.DFS(target)
@@ -64,7 +66,7 @@ class PolyTreeNode
       nil
   end
 
-  def BFS(target)
+  def bfs(target)
     queue = [self]
     while true
       if queue.empty?
